@@ -61,29 +61,21 @@ class Graph:
         
         visited = [False for i in range(self.size + 1)]  
   
-        # Create a stack for DFS  
         stack = Stack()
         s = starting_vertex
-        # Push the current source node.  
         stack.push(s)
   
         while (stack.size() > 0):  
-            # Pop a vertex from stack and print it  
             s = stack.pop()  
   
-            # Stack may contain same vertex twice. So  
-            # we need to print the popped item only  
-            # if it is not visited.  
             if (not visited[s]):  
                 print(s,end=' ') 
                 visited[s] = True 
   
-            # Get all adjacent vertices of the popped vertex s  
-            # If a adjacent has not been visited, then push it  
-            # to the stack.  
             for node in self.get_neighbors(s):  
                 if (not visited[node]):  
                     stack.push(node)
+        print("\n")
   
 
     def dft_recursive(self, starting_vertex, start, depth=1):
@@ -98,6 +90,7 @@ class Graph:
             if starting_vertex == start and depth > 1:
                 return
             self.dft_recursive(i, start, depth + 1)
+        print("\n")
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -105,7 +98,29 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        queue = Queue()
+        visited = []
+
+        queue.enqueue([starting_vertex])
+
+        while queue.size() > 0:
+
+            path  = queue.dequeue()
+            current = path[-1]
+
+            if current == destination_vertex:
+
+                return path
+
+            if current not in visited:
+
+                visited.append(current)
+
+                for vertex in self.get_neighbors(current):
+
+                    temp_path = path
+
+                    queue.enqueue(temp_path + [vertex])
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -178,7 +193,7 @@ if __name__ == '__main__':
         1, 2, 4, 6, 3, 5, 7
     '''
     graph.dft(1)
-    graph.dft_recursive(1, 1)
+    #graph.dft_recursive(1, 1)
 
     '''
     Valid BFS path:
