@@ -41,7 +41,7 @@ class Graph:
         here = starting_vertex
         arr = []
         queue = Queue()
-        print(here, end=' ')
+        print(here)
         while here in self.vertices and arr.count(here) == 0:
             arr.append(here)
             for i in self.get_neighbors(here):
@@ -50,8 +50,8 @@ class Graph:
                 
             here = queue.dequeue()
             if here:
-                print(here, end=' ')
-        print('\n')
+                print(here)
+
 
     def dft(self, starting_vertex):
         """
@@ -69,13 +69,13 @@ class Graph:
             s = stack.pop()  
   
             if (not visited[s]):  
-                print(s,end=' ') 
+                print(s) 
                 visited[s] = True 
   
             for node in self.get_neighbors(s):  
                 if (not visited[node]):  
                     stack.push(node)
-        print("\n")
+ 
   
 
     def dft_recursive(self, starting_vertex, start, depth=1):
